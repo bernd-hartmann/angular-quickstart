@@ -1,24 +1,35 @@
 <h1>Bernd's first Angular App Jeah uh</h1>
 
 <h1>{{title}}</h1>
-<h2>{{hero.name}} details!</h2>
 
-<p>(event) Binding in runden Klammern</p>
-<p>[property] Binding in eckigen Klammern</p>
-<div>
-    <span>say Hello on input</span><!-- kein window verfügbar nur context (scope) von component -->
-    <button (click)="sayHello()">sayHello</button>
-    <input [value]="hero.name"
-           (input)="sayHello()" >
-</div>
-<div>
+<div *ngIf="selectedHero">
+    <h2>{{selectedHero.name}} details!</h2>
+    <p>(event) Binding in runden Klammern</p>
+    <p>[property] Binding in eckigen Klammern</p>
 
-    <label>name: </label>
+    <div>
+        <span>say Hello on input</span><!-- kein window verfügbar nur context (scope) von component -->
+        <button (click)="sayHello()">sayHello</button>
+        <input [value]="selectedHero.name"
+               (input)="sayHello()">
+    </div>
+    <div>
+        <label>name: </label>
+        <input [ngModel]="selectedHero.name" readonly disabled (input)="console.log('input event')"><!--readonly-->
+        <input [ngModel]="selectedHero.name" (ngModelChange)="hero.name=$event">
+    </div>
+    <div>
+        <label>name: </label>
+        <input [(ngModel)]="selectedHero.name" placeholder="name">
+    </div>
+</div>
 
-    <input [ngModel]="hero.name" readonly disabled (input)="console.log('input event')"><!--readonly-->
-    <input [ngModel]="hero.name" (ngModelChange)="hero.name=$event">
-</div>
-<div>
-    <label>name: </label>
-    <input [(ngModel)]="hero.name" placeholder="name">
-</div>
+
+<h2>My Heroes</h2>
+<ul class="heroes">
+    <li *ngFor="let hero of heroes"
+        (click)="onSelect(hero)"
+        [class.selected]="hero === selectedHero">
+        <span class="badge">{{hero.id}}</span>{{hero.name}}
+    </li>
+</ul>
