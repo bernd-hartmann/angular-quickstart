@@ -5,6 +5,7 @@ import {Hero} from "./hero"
 @Component({
     selector:"my-heroes",
     templateUrl:"heroes.component.html",
+    styleUrls:["heroes.component.css"],
     providers: [HeroService],
     moduleId: module.id
 })
