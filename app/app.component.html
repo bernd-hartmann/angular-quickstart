@@ -2,28 +2,7 @@
 
 <h1>{{title}}</h1>
 
-<div *ngIf="selectedHero">
-    <h2>{{selectedHero.name}} details!</h2>
-    <p>(event) Binding in runden Klammern</p>
-    <p>[property] Binding in eckigen Klammern</p>
-
-    <div>
-        <span>say Hello on input</span><!-- kein window verfügbar nur context (scope) von component -->
-        <button (click)="sayHello()">sayHello</button>
-        <input [value]="selectedHero.name"
-               (input)="sayHello()">
-    </div>
-    <div>
-        <label>name: </label>
-        <input [ngModel]="selectedHero.name" readonly disabled (input)="console.log('input event')"><!--readonly-->
-        <input [ngModel]="selectedHero.name" (ngModelChange)="hero.name=$event">
-    </div>
-    <div>
-        <label>name: </label>
-        <input [(ngModel)]="selectedHero.name" placeholder="name">
-    </div>
-</div>
-
+<my-hero-detail [hero]="selectedHero"></my-hero-detail>
 
 <h2>My Heroes</h2>
 <ul class="heroes">
